@@ -4,9 +4,9 @@
 {% block title %}Landing Page{% endblock %}
 
 {% block content %}
-    <h1>Welcome to Our Employee Management System</h1>
+    <h1>Welcome The Pet Clinic Management App</h1>
     <div style="margin-top: 20px;">
-        <h2>Choose User</h2>
+        <h2>Choose an Employee name to login</h2>
         <form action="{% url 'core:login' %}" method="post">
             {% csrf_token %}
             <select name="username" id="userSelect">

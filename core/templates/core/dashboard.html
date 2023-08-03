@@ -1,0 +1,48 @@
+{% extends 'core/base.html' %}
+{% block title %}Dashboard{% endblock %}
+{% load static %}
+{% block content %}
+    <a href="{% url 'core:my_profile' %}"><button>To My Profile</button></a>
+    <a href="{% url 'core:logout' %}"><button>Logout</button></a>
+    <h1>Dashboard</h1>
+        {% if user.is_staff %}
+                   <h2>This is an Admin page with full CRUD Permissions</h2>
+                    {% else %}
+                        <h2>This is a User page with limited CRUD Permissions</h2>
+                    {% endif %}
+
+
+    <!-- Users List -->
+    <div style="float: left; margin-right: 50px;">
+        <h2>Employees List</h2>
+        <div>
+             {% if user.is_staff %}
+            <a href="{% url 'core:signup' %}"><button>Create User</button></a>
+            {% endif %}
+            <table style="border-collapse: collapse; width: 100%;">
+                <tr>
+                    <th style="border: 1px solid #ccc; padding: 8px;">Username</th>
+                    <th style="border: 1px solid #ccc; padding: 8px;">Is_admin</th>
+
+                    <th style="border: 1px solid #ccc; padding: 8px;">Actions</th>
+                </tr>
+                {% for user in users %}
+                    <tr>
+                        <td style="border: 1px solid #ccc; padding: 8px;">{{ user.username }}</td>
+                        <td style="border: 1px solid #ccc; padding: 8px;">{{ user.is_staff }}</td>
+                        <td style="border: 1px solid #ccc; padding: 8px;">
+                             {% if request.user.is_staff %}
+                            <a href="{% url 'user:profile_update' user.id %}">Edit</a> |
+                            <a href="{% url 'user:profile_delete' user.id %}">Delete</a>
+                        {% else %}
+                            <p style="color:red">Not Permitted</p>
+                        {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+    <!-- Users List End -->
+{% endblock %}
+```

@@ -1,0 +1,48 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}My Profile{% endblock %}
+
+{% block content %}
+    <a href="{% url 'core:dashboard' %}"><button>Dashboard</button></a>
+    {% if user.is_staff %}
+
+    {% endif %}
+
+    <h1>Welcome, {{ user.username }}!</h1>
+
+    <h2>My Profile</h2>
+
+    <table style="border-collapse: collapse; width: 100%; margin-top: 20px;">
+        <tr>
+            <th style="border: 1px solid #ccc; padding: 8px;">Username</th>
+            <th style="border: 1px solid #ccc; padding: 8px;">First Name</th>
+            <th style="border: 1px solid #ccc; padding: 8px;">Last Name</th>
+            <th style="border: 1px solid #ccc; padding: 8px;">Email</th>
+            <th style="border: 1px solid #ccc; padding: 8px;">Joined</th>
+            <th style="border: 1px solid #ccc; padding: 8px;">Last Login</th>
+            <th style="border: 1px solid #ccc; padding: 8px;">Is_admin</th>
+            <th style="border: 1px solid #ccc; padding: 8px;">Action</th>
+
+        </tr>
+
+            <tr>
+                <td style="border: 1px solid #ccc; padding: 8px;">{{ user.username }}</td>
+                <td style="border: 1px solid #ccc; padding: 8px;">{{ user.first_name }}</td>
+                <td style="border: 1px solid #ccc; padding: 8px;">{{ user.last_name }}</td>
+                <td style="border: 1px solid #ccc; padding: 8px;">{{ user.email }}</td>
+                <td style="border: 1px solid #ccc; padding: 8px;">{{ user.date_joined }}</td>
+                <td style="border: 1px solid #ccc; padding: 8px;">{{ user.last_login }}</td>
+                <td style="border: 1px solid #ccc; padding: 8px;">{{ user.is_staff }}</td>
+                <td style="border: 1px solid #ccc; padding: 8px;">
+                    {% if user.is_staff %}
+                    <a href="{% url 'user:profile_update' user.id %}">Edit</a>
+                    {% else %}
+                        <p style="color:red">Only for Admin</p>
+                    {% endif %}
+            </tr>
+
+
+    </table>
+
+{% endblock %}
