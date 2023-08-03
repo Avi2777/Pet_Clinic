@@ -1,0 +1,11 @@
+name: Pet_Clinic_Env
+dependencies:
+  - python=3.10.4
+  - psycopg2==2.8.6
+  - pip
+  - pip:
+      - django==4.0.9
+      - djangorestframework==3.13
+      - drf-yasg==1.21.3
+      - django-extensions==3.2.1
+      - django-cors-headers==3.13.0
